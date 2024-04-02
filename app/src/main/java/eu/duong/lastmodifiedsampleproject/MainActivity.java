@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.view.WindowCompat;
@@ -43,6 +44,8 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    String TAG = "lastmodifiedsampleproject";
 
     private static String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
     File selectedFile;
@@ -89,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
         binding.setLastmodified.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               boolean result= selectedFile.setLastModified(new Date().getTime());
+
+                Log.d(TAG, "setLastModified");
+                Log.d(TAG, "path:" + selectedFile.getAbsolutePath());
+                boolean result= selectedFile.setLastModified(new Date().getTime());
+                Log.d(TAG, "result: " + result);
 
                 binding.result.setText(result ? "Success" : "Failed");
                 binding.result.setTextColor(getColor(result ? R.color.green :  R.color.red));
